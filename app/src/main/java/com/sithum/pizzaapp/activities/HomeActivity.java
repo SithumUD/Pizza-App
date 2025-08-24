@@ -1,9 +1,6 @@
 package com.sithum.pizzaapp.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,24 +10,17 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.sithum.pizzaapp.R;
 
-public class
-SplashActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.activity_home);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        new Handler(Looper.getMainLooper()).postDelayed(()->{
-            Intent intent = new Intent(SplashActivity.this, OnboardActivity.class);
-            startActivity(intent);
-            finish();
-        }, 3000);
     }
 }

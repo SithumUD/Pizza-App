@@ -13,6 +13,21 @@
         android:theme="@style/Theme.PizzaApp"
         tools:targetApi="31">
         <activity
+            android:name=".activities.CartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.FoodDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.LocationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.SignupActivity"
             android:exported="false" />
         <activity
