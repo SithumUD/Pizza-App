@@ -13,6 +13,24 @@
         android:theme="@style/Theme.PizzaApp"
         tools:targetApi="31">
         <activity
+            android:name=".activities.HelpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.PaymentMethodsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AddressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CheckoutActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.CartActivity"
             android:exported="false" />
         <activity
