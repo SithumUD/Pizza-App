@@ -80,6 +80,7 @@
                         android:layout_marginStart="12dp">
 
                         <TextView
+                            android:id="@+id/txtname"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Sachin Perera"
@@ -88,6 +89,7 @@
                             android:textColor="#000" />
 
                         <TextView
+                            android:id="@+id/txtemail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="sachin.p@email.com"
@@ -95,6 +97,7 @@
                             android:textColor="#777" />
 
                         <TextView
+                            android:id="@+id/tvEditProfile"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Edit Profile"
@@ -106,7 +109,6 @@
             </androidx.cardview.widget.CardView>
 
             <!-- Menu Items -->
-            <?xml version="1.0" encoding="utf-8"?>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -146,7 +148,6 @@
             </androidx.cardview.widget.CardView>
 
             <!-- Menu Items -->
-            <?xml version="1.0" encoding="utf-8"?>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -186,7 +187,6 @@
             </androidx.cardview.widget.CardView>
 
             <!-- Menu Items -->
-            <?xml version="1.0" encoding="utf-8"?>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -226,7 +226,6 @@
             </androidx.cardview.widget.CardView>
 
             <!-- Menu Items -->
-            <?xml version="1.0" encoding="utf-8"?>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -266,7 +265,6 @@
             </androidx.cardview.widget.CardView>
 
             <!-- Menu Items -->
-            <?xml version="1.0" encoding="utf-8"?>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -306,7 +304,6 @@
             </androidx.cardview.widget.CardView>
 
             <!-- Menu Items -->
-            <?xml version="1.0" encoding="utf-8"?>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -346,7 +343,6 @@
             </androidx.cardview.widget.CardView>
 
             <!-- Menu Items -->
-            <?xml version="1.0" encoding="utf-8"?>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="60dp"

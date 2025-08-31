@@ -324,6 +324,7 @@
                         android:focusable="true">
 
                         <LinearLayout
+                            android:id="@+id/btnbranch"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
@@ -371,6 +372,7 @@
                         android:focusable="true">
 
                         <LinearLayout
+                            android:id="@+id/btnproduct"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
@@ -428,6 +430,7 @@
                         android:focusable="true">
 
                         <LinearLayout
+                            android:id="@+id/btnorder"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
@@ -475,6 +478,7 @@
                         android:focusable="true">
 
                         <LinearLayout
+                            android:id="@+id/btnuser"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
@@ -594,7 +598,6 @@
                                 android:text="Delivered"
                                 android:textColor="#4CAF50"
                                 android:textSize="12sp"
-                                android:background="@drawable/status_delivered_background"
                                 android:paddingHorizontal="8dp"
                                 android:paddingVertical="4dp" />
 
