@@ -26,8 +26,8 @@
             android:id="@+id/btnBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_arrow_back"
-            android:tint="@android:color/white"
+            android:src="@drawable/backicon"
+            app:tint="@android:color/white"
             android:contentDescription="Back" />
 
         <TextView
@@ -113,21 +113,6 @@
                         android:gravity="center"
                         android:orientation="vertical">
 
-                        <View
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_marginBottom="8dp"
-                            android:background="@drawable/location_marker" />
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_gravity="end"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginEnd="16dp"
-                            android:src="@drawable/ic_arrow_forward"
-                            android:tint="#666666" />
-
                     </LinearLayout>
 
                 </LinearLayout>
@@ -203,8 +188,8 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_cash"
-                            android:tint="#666666" />
+                            android:src="@drawable/cashicon"
+                            app:tint="#666666" />
 
                     </LinearLayout>
 
@@ -254,8 +239,8 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_credit_card"
-                            android:tint="#666666" />
+                            android:src="@drawable/creditcardicon"
+                            app:tint="#666666" />
 
                     </LinearLayout>
 
@@ -404,7 +389,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_margin="16dp"
-        android:background="@drawable/button_rounded_red"
+        android:background="@drawable/chip_bg"
         android:text="Place Order"
         android:textColor="@android:color/white"
         android:textSize="16sp"

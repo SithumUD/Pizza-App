@@ -116,16 +116,16 @@
                             android:id="@+id/btnEditHome"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_edit"
-                            android:tint="#666666"
+                            android:src="@drawable/editicon"
+                            app:tint="#666666"
                             android:layout_marginEnd="16dp"/>
 
                         <ImageView
                             android:id="@+id/btnDeleteHome"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_delete"
-                            android:tint="#666666"/>
+                            android:src="@drawable/deleteicon"
+                            app:tint="#666666"/>
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -140,7 +140,7 @@
                 android:text="+   Add New Address"
                 android:textAllCaps="false"
                 android:textColor="#E53935"
-                android:background="@drawable/add_address_button_bg"/>
+                android:background="@drawable/chip_bg"/>
         </LinearLayout>
     </ScrollView>
 
@@ -172,7 +172,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter address name (e.g. Home, Office)"
-            android:background="@drawable/edittext_bg"
             android:padding="12dp"
             android:layout_marginBottom="12dp"/>
 
@@ -181,7 +180,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter full address"
-            android:background="@drawable/edittext_bg"
             android:padding="12dp"
             android:layout_marginBottom="12dp"/>
 
@@ -216,7 +214,7 @@
                 android:text="Cancel"
                 android:textAllCaps="false"
                 android:textColor="#E53935"
-                android:background="@drawable/cancel_button_bg"
+                android:background="@drawable/chip_bg"
                 android:layout_marginStart="8dp"/>
         </LinearLayout>
     </LinearLayout>

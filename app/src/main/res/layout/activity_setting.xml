@@ -26,7 +26,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/backicon"
-            android:tint="@android:color/white"
+            app:tint="@android:color/white"
             android:contentDescription="Back" />
 
         <TextView
@@ -186,7 +186,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginBottom="16dp"
-                        android:background="@drawable/edittext_background"
                         android:hint="Sachin Perera"
                         android:paddingHorizontal="16dp"
                         android:textColor="#333333"
@@ -206,7 +205,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginBottom="16dp"
-                        android:background="@drawable/edittext_background"
                         android:hint="sachin.p@email.com"
                         android:paddingHorizontal="16dp"
                         android:textColor="#333333"
@@ -226,7 +224,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginBottom="20dp"
-                        android:background="@drawable/edittext_background"
                         android:hint="+94 77 123 4567"
                         android:paddingHorizontal="16dp"
                         android:textColor="#333333"
@@ -256,7 +253,6 @@
                             android:layout_height="48dp"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:background="@drawable/button_white_background"
                             android:text="Cancel"
                             android:textColor="#E53E3E"
                             android:textSize="16sp"
@@ -488,7 +484,6 @@
                             android:layout_height="40dp"
                             android:layout_marginEnd="8dp"
                             android:layout_weight="1"
-                            android:background="@drawable/button_red_background"
                             android:text="Light"
                             android:textColor="@android:color/white"
                             android:textSize="14sp" />
@@ -499,7 +494,6 @@
                             android:layout_height="40dp"
                             android:layout_marginHorizontal="4dp"
                             android:layout_weight="1"
-                            android:background="@drawable/button_white_background"
                             android:text="Dark"
                             android:textColor="#666666"
                             android:textSize="14sp" />
@@ -510,7 +504,7 @@
                             android:layout_height="40dp"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:background="@drawable/button_white_background"
+                            android:background="@drawable/chip_bg"
                             android:text="System"
                             android:textColor="#666666"
                             android:textSize="14sp" />
@@ -551,7 +545,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginBottom="8dp"
-                        android:background="@drawable/language_selected_background"
+                        android:background="@drawable/chip_bg"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingHorizontal="16dp">
@@ -567,8 +561,8 @@
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@drawable/ic_check"
-                            android:tint="#E53E3E" />
+                            android:src="@drawable/backicon"
+                            app:tint="#E53E3E" />
 
                     </LinearLayout>
 
@@ -578,7 +572,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginBottom="8dp"
-                        android:background="@drawable/language_unselected_background"
+                        android:background="@drawable/chip_bg"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingHorizontal="16dp">
@@ -598,7 +592,7 @@
                         android:id="@+id/tamilOption"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:background="@drawable/language_unselected_background"
+                        android:background="@drawable/chip_bg"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingHorizontal="16dp">
@@ -646,7 +640,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginBottom="12dp"
-                        android:background="@drawable/button_white_background"
+                        android:background="@drawable/chip_bg"
                         android:text="Change Password"
                         android:textColor="#E53E3E"
                         android:textSize="16sp"
@@ -657,7 +651,7 @@
                         android:id="@+id/logOutButton"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:background="@drawable/button_white_background"
+                        android:background="@drawable/chip_bg"
                         android:text="Log Out"
                         android:textColor="#E53E3E"
                         android:textSize="16sp"
@@ -707,7 +701,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginBottom="16dp"
-                        android:background="@drawable/edittext_background"
                         android:hint="Enter your current password"
                         android:inputType="textPassword"
                         android:paddingHorizontal="16dp"
@@ -730,7 +723,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginBottom="16dp"
-                        android:background="@drawable/edittext_background"
                         android:hint="Enter your new password"
                         android:inputType="textPassword"
                         android:paddingHorizontal="16dp"
@@ -753,7 +745,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginBottom="8dp"
-                        android:background="@drawable/edittext_background"
                         android:hint="Confirm your new password"
                         android:inputType="textPassword"
                         android:paddingHorizontal="16dp"
@@ -794,7 +785,7 @@
                             android:layout_height="48dp"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:background="@drawable/button_white_background"
+                            android:background="@drawable/chip_bg"
                             android:text="Cancel"
                             android:textColor="#E53E3E"
                             android:textSize="16sp"
