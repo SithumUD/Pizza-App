@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.sithum.pizzaapp.R;
 import com.sithum.pizzaapp.models.Product;
 
@@ -17,15 +19,15 @@ import java.util.List;
 public class ProductManageAdapter extends RecyclerView.Adapter<ProductManageAdapter.ProductViewHolder> {
 
     private List<Product> productList;
-    private OnProductClickListener listener;
+    private OnProductActionListener listener;
 
-    public interface OnProductClickListener {
-        void onProductClick(Product product);
-        void onProductEditClick(Product product);
-        void onProductDeleteClick(Product product);
+    public interface OnProductActionListener {
+        void onEditProduct(Product product, int position);
+        void onDeleteProduct(Product product, int position);
+        void onProductClick(Product product, int position);
     }
 
-    public ProductManageAdapter(List<Product> productList, OnProductClickListener listener) {
+    public ProductManageAdapter(List<Product> productList, OnProductActionListener listener) {
         this.productList = productList;
         this.listener = listener;
     }
@@ -41,7 +43,7 @@ public class ProductManageAdapter extends RecyclerView.Adapter<ProductManageAdap
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
-        holder.bind(product, listener);
+        holder.bind(product, position);
     }
 
     @Override
@@ -49,40 +51,89 @@ public class ProductManageAdapter extends RecyclerView.Adapter<ProductManageAdap
         return productList.size();
     }
 
-    public static class ProductViewHolder extends RecyclerView.ViewHolder {
-        private TextView productName, productDescription, productPrice, productCategory, productStatus;
-        private ImageView editButton, deleteButton;
+    class ProductViewHolder extends RecyclerView.ViewHolder {
+        private ImageView ivProductImage;
+        private TextView tvProductName;
+        private TextView tvProductDescription;
+        private TextView tvProductPrice;
+        private TextView tvProductCategory;
+        private TextView tvProductStatus;
+        private ImageView btnEdit;
+        private ImageView btnDelete;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
-            productName = itemView.findViewById(R.id.productName);
-            productDescription = itemView.findViewById(R.id.productDescription);
-            productPrice = itemView.findViewById(R.id.productPrice);
-            productCategory = itemView.findViewById(R.id.productCategory);
-            productStatus = itemView.findViewById(R.id.productStatus);
-            editButton = itemView.findViewById(R.id.editButton);
-            deleteButton = itemView.findViewById(R.id.deleteButton);
+
+            ivProductImage = itemView.findViewById(R.id.productImage); // Was R.id.ivProductImage
+            tvProductName = itemView.findViewById(R.id.productName); // Was R.id.tvProductName
+            tvProductDescription = itemView.findViewById(R.id.productDescription); // Was R.id.tvProductDescription
+            tvProductPrice = itemView.findViewById(R.id.productPrice); // Was R.id.tvProductPrice
+            tvProductCategory = itemView.findViewById(R.id.productCategory); // Was R.id.tvProductCategory
+            tvProductStatus = itemView.findViewById(R.id.productStatus); // Was R.id.tvProductStatus
+            btnEdit = itemView.findViewById(R.id.editButton); // This one is correct
+            btnDelete = itemView.findViewById(R.id.deleteButton); // This one is correct
         }
 
-        public void bind(Product product, OnProductClickListener listener) {
-            productName.setText(product.getName());
-            productDescription.setText(product.getDescription());
-            productPrice.setText("LKR " + product.getPrice());
-            productCategory.setText(product.getCategory());
+        public void bind(Product product, int position) {
+            tvProductName.setText(product.getName());
+            tvProductDescription.setText(product.getDescription());
+            tvProductPrice.setText("LKR " + String.format("%.0f", product.getPrice()));
+            tvProductCategory.setText(product.getCategory());
+            tvProductStatus.setText(product.getStatus());
 
-            // Set status
-            if ("available".equals(product.getStatus())) {
-                productStatus.setText("Available");
-                productStatus.setTextColor(itemView.getContext().getResources().getColor(R.color.green));
+            // Set status text color
+            if ("Available".equals(product.getStatus())) {
+                tvProductStatus.setTextColor(itemView.getContext().getResources().getColor(R.color.green));
             } else {
-                productStatus.setText("Unavailable");
-                productStatus.setTextColor(itemView.getContext().getResources().getColor(R.color.red));
+                tvProductStatus.setTextColor(itemView.getContext().getResources().getColor(R.color.red));
             }
 
+            // Load product image with Glide
+            loadProductImage(product);
+
             // Set click listeners
-            itemView.setOnClickListener(v -> listener.onProductClick(product));
-            editButton.setOnClickListener(v -> listener.onProductEditClick(product));
-            deleteButton.setOnClickListener(v -> listener.onProductDeleteClick(product));
+            itemView.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onProductClick(product, position);
+                }
+            });
+
+            btnEdit.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onEditProduct(product, position);
+                }
+            });
+
+            btnDelete.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onDeleteProduct(product, position);
+                }
+            });
+        }
+
+        private void loadProductImage(Product product) {
+            try {
+                if (product.hasOnlineImage()) {
+                    // Load image from Cloudinary URL
+                    Glide.with(itemView.getContext())
+                            .load(product.getImageUrl())
+                            .transform(new RoundedCorners(16))
+                            .placeholder(R.drawable.pizza)
+                            .error(R.drawable.pizza)
+                            .into(ivProductImage);
+                } else {
+                    // Load local drawable resource
+                    Glide.with(itemView.getContext())
+                            .load(product.getImageResource())
+                            .transform(new RoundedCorners(16))
+                            .placeholder(R.drawable.pizza)
+                            .error(R.drawable.pizza)
+                            .into(ivProductImage);
+                }
+            } catch (Exception e) {
+                // Fallback to default image
+                ivProductImage.setImageResource(R.drawable.pizza);
+            }
         }
     }
 }

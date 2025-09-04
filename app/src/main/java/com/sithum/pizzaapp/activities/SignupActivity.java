@@ -124,7 +124,7 @@ public class SignupActivity extends AppCompatActivity {
                                 sendEmailVerification(user);
 
                                 // Navigate to main activity or login activity
-                                Intent intent = new Intent(SignupActivity.this, HomeActivity.class);
+                                Intent intent = new Intent(SignupActivity.this, LocationActivity.class);
                                 startActivity(intent);
                                 finish();
 

@@ -90,86 +90,31 @@
         app:layout_constraintTop_toBottomOf="@id/tvFoodDescription"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <!-- Extra Cheese Option -->
-    <CheckBox
-        android:id="@+id/cbExtraCheese"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Extra Cheese"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintTop_toBottomOf="@id/tvCustomizeTitle"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <TextView
-        android:id="@+id/tvExtraCheesePrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LKR 200"
-        android:textSize="14sp"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBaseline_toBaselineOf="@id/cbExtraCheese"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <!-- Double Pepperoni Option -->
-    <CheckBox
-        android:id="@+id/cbDoublePepperoni"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Double Pepperoni"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintTop_toBottomOf="@id/cbExtraCheese"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <TextView
-        android:id="@+id/tvDoublePepperoniPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LKR 250"
-        android:textSize="14sp"
-        android:textColor="@android:color/black"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBaseline_toBaselineOf="@id/cbDoublePepperoni"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <!-- Stuffed Crust Option -->
-    <CheckBox
-        android:id="@+id/cbStuffedCrust"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stuffed Crust"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintTop_toBottomOf="@id/cbDoublePepperoni"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <TextView
-        android:id="@+id/tvStuffedCrustPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LKR 300"
-        android:textSize="14sp"
-        android:textColor="@android:color/black"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBaseline_toBaselineOf="@id/cbStuffedCrust"
-        app:layout_constraintEnd_toEndOf="parent"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/optionRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginVertical="16dp"
+        android:clipToPadding="false"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCustomizeTitle" />
 
     <!-- Quantity Section -->
     <TextView
         android:id="@+id/tvQuantityLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quantity"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="16dp"
-        app:layout_constraintTop_toBottomOf="@id/cbStuffedCrust"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:text="Quantity"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/optionRecyclerView" />
 
     <LinearLayout
         android:id="@+id/layoutQuantity"

@@ -221,14 +221,14 @@ public class SigninActivity extends AppCompatActivity {
     private void navigateToStaffScreen() {
         Toast.makeText(this, "Welcome Staff!", Toast.LENGTH_SHORT).show();
         // For staff, you can navigate to a different activity or same as customer
-        Intent intent = new Intent(SigninActivity.this, HomeActivity.class);
+        Intent intent = new Intent(SigninActivity.this, LocationActivity.class);
         startActivity(intent);
         finish();
     }
 
     private void navigateToCustomerScreen() {
         Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(SigninActivity.this, HomeActivity.class);
+        Intent intent = new Intent(SigninActivity.this, LocationActivity.class);
         startActivity(intent);
         finish();
     }

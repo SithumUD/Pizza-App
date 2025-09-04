@@ -1,35 +1,57 @@
 package com.sithum.pizzaapp.models;
 
 import java.util.List;
-import java.util.Map;
+import java.io.Serializable;
 
-public class Product {
+public class Product implements Serializable {
     private String id;
     private String name;
     private String description;
     private double price;
     private String category;
     private String status;
-    private String imageUrl;
-    private List<Map<String, Object>> customizations;
+    private int imageResource; // For local drawable resources
+    private String imageUrl; // For Cloudinary URLs
+    private List<CustomizationOption> customizationOptions;
     private long createdAt;
     private long updatedAt;
 
-    // Constructors
-    public Product() {
-        // Default constructor required for Firestore
-    }
+    // Default constructor (required for Firebase)
+    public Product() {}
 
-    public Product(String name, String description, double price, String category) {
+    // Constructor with drawable resource
+    public Product(String id, String name, String description, double price,
+                   String category, String status, int imageResource,
+                   List<CustomizationOption> customizationOptions) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.category = category;
-        this.status = "available";
+        this.status = status;
+        this.imageResource = imageResource;
+        this.customizationOptions = customizationOptions;
         this.createdAt = System.currentTimeMillis();
+        this.updatedAt = System.currentTimeMillis();
     }
 
-    // Getters and setters
+    // Constructor with image URL
+    public Product(String id, String name, String description, double price,
+                   String category, String status, String imageUrl,
+                   List<CustomizationOption> customizationOptions) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.category = category;
+        this.status = status;
+        this.imageUrl = imageUrl;
+        this.customizationOptions = customizationOptions;
+        this.createdAt = System.currentTimeMillis();
+        this.updatedAt = System.currentTimeMillis();
+    }
+
+    // Getters and Setters
     public String getId() {
         return id;
     }
@@ -78,6 +100,14 @@ public class Product {
         this.status = status;
     }
 
+    public int getImageResource() {
+        return imageResource;
+    }
+
+    public void setImageResource(int imageResource) {
+        this.imageResource = imageResource;
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -86,12 +116,12 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
-    public List<Map<String, Object>> getCustomizations() {
-        return customizations;
+    public List<CustomizationOption> getCustomizationOptions() {
+        return customizationOptions;
     }
 
-    public void setCustomizations(List<Map<String, Object>> customizations) {
-        this.customizations = customizations;
+    public void setCustomizationOptions(List<CustomizationOption> customizationOptions) {
+        this.customizationOptions = customizationOptions;
     }
 
     public long getCreatedAt() {
@@ -108,5 +138,29 @@ public class Product {
 
     public void setUpdatedAt(long updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    // Utility method to check if product has online image
+    public boolean hasOnlineImage() {
+        return imageUrl != null && !imageUrl.isEmpty();
+    }
+
+    // Utility method to get display image (prioritizes online image)
+    public String getDisplayImageUrl() {
+        return hasOnlineImage() ? imageUrl : null;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", category='" + category + '\'' +
+                ", status='" + status + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", customizationOptions=" + (customizationOptions != null ? customizationOptions.size() : 0) +
+                '}';
     }
 }

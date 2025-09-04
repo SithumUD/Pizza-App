@@ -33,7 +33,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -50,4 +49,9 @@ dependencies {
 
     implementation("com.squareup.picasso:picasso:2.71828")
 
+    // Glide for image loading
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
+    implementation ("com.cloudinary:cloudinary-android:3.0.2")
+    implementation ("com.google.code.gson:gson:2.11.0")
 }
