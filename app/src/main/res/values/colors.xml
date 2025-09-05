@@ -37,4 +37,10 @@
     <!-- Tab Colors -->
     <color name="tab_selected">#FFFFFF</color>
     <color name="tab_unselected">#80FFFFFF</color>
+
+    <color name="orange_text">#856404</color>
+    <color name="blue_text">#0C5460</color>
+    <color name="purple_text">#6F42C1</color>
+    <color name="green_text">#155724</color>
+    <color name="red_text">#721C24</color>
 </resources>

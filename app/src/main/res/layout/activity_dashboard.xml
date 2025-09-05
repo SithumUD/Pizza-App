@@ -115,6 +115,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/totalOrdersCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="124"
@@ -124,6 +125,7 @@
                             android:layout_marginTop="4dp" />
 
                         <TextView
+                            android:id="@+id/totalOrdersChange"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="+12%"
@@ -167,6 +169,7 @@
                             android:layout_marginTop="2dp" />
 
                         <TextView
+                            android:id="@+id/revenueAmount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="245,800"
@@ -175,6 +178,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/revenueChange"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="+8%"
@@ -220,6 +224,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/activeUsersCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="348"
@@ -229,6 +234,7 @@
                             android:layout_marginTop="4dp" />
 
                         <TextView
+                            android:id="@+id/activeUsersChange"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="+5%"
@@ -264,6 +270,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/branchesCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="4"
@@ -273,6 +280,7 @@
                             android:layout_marginTop="4dp" />
 
                         <TextView
+                            android:id="@+id/branchesChange"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0%"
@@ -549,6 +557,7 @@
 
             <!-- Recent Order Item 1 -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/recentOrder1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -571,6 +580,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/recentOrder1Id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="PM-4892"
@@ -579,6 +589,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/recentOrder1Customer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Amal Fernando"
@@ -593,6 +604,7 @@
                             android:layout_marginTop="4dp">
 
                             <TextView
+                                android:id="@+id/recentOrder1Status"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Delivered"
@@ -602,6 +614,7 @@
                                 android:paddingVertical="4dp" />
 
                             <TextView
+                                android:id="@+id/recentOrder1Time"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="• 2 hours ago"
@@ -614,6 +627,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/recentOrder1Amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="LKR 3,600"
@@ -628,6 +642,7 @@
 
             <!-- Recent Order Item 2 -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/recentOrder2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -650,6 +665,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/recentOrder2Id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="PM-4891"
@@ -658,6 +674,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/recentOrder2Customer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Saman Perera"
@@ -666,6 +683,7 @@
                             android:layout_marginTop="2dp" />
 
                         <TextView
+                            android:id="@+id/recentOrder2Time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="• 3 hours ago"
@@ -676,6 +694,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/recentOrder2Amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="LKR 2,150"

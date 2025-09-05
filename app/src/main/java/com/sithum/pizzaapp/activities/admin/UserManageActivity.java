@@ -170,7 +170,7 @@ public class UserManageActivity extends AppCompatActivity implements UserAdapter
 
     private void setupDropdowns() {
         // User type dropdown
-        String[] userTypes = new String[]{"Customer", "Staff", "Admin"};
+        String[] userTypes = new String[]{"Customer", "Staff", "Admin", "Driver"};
         ArrayAdapter<String> userTypeAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, userTypes);
         spinnerUserType.setAdapter(userTypeAdapter);
