@@ -70,6 +70,7 @@ public class CheckoutActivity extends AppCompatActivity {
     private double total = 0;
     private String branchId;
     private List<CartItem> cartItems = new ArrayList<>();
+    private String deliveryAddress = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +92,7 @@ public class CheckoutActivity extends AppCompatActivity {
         initViews();
         setupRecyclerView();
         loadCartDataFromLocalStorage();
-        loadUserAddress();
+        loadDefaultAddress();
         setupClickListeners();
     }
 
@@ -166,7 +167,7 @@ public class CheckoutActivity extends AppCompatActivity {
         itemRecyclerView.setAdapter(adapter);
     }
 
-    private void loadUserAddress() {
+    private void loadDefaultAddress() {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
             Toast.makeText(this, "Please login to continue", Toast.LENGTH_SHORT).show();
@@ -174,37 +175,114 @@ public class CheckoutActivity extends AppCompatActivity {
             return;
         }
 
-        db.collection("users")
-                .document(currentUser.getUid())
+        // Show loading state
+        tvDeliveryAddress.setText("Loading address...");
+
+        // Query for default address
+        db.collection("addresses")
+                .whereEqualTo("userId", currentUser.getUid())
+                .whereEqualTo("isDefault", true)
                 .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult().exists()) {
-                        DocumentSnapshot document = task.getResult();
-                        String address = document.getString("address");
-                        if (address != null && !address.isEmpty()) {
-                            tvDeliveryAddress.setText(address);
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        // Found default address
+                        DocumentSnapshot addressDoc = queryDocumentSnapshots.getDocuments().get(0);
+                        String addressName = addressDoc.getString("name");
+                        String fullAddress = addressDoc.getString("fullAddress");
+
+                        if (fullAddress != null && !fullAddress.trim().isEmpty()) {
+                            deliveryAddress = fullAddress;
+                            // Display address with name if available
+                            if (addressName != null && !addressName.trim().isEmpty()) {
+                                tvDeliveryAddress.setText(addressName + "\n" + fullAddress);
+                            } else {
+                                tvDeliveryAddress.setText(fullAddress);
+                            }
                         } else {
-                            tvDeliveryAddress.setText("No address found. Please update your profile.");
+                            // Handle case where address data is incomplete
+                            tvDeliveryAddress.setText("Address data incomplete. Please update your address.");
+                            deliveryAddress = "";
                         }
                     } else {
-                        tvDeliveryAddress.setText("No address found. Please update your profile.");
+                        // No default address found, try to get any address
+                        loadAnyAvailableAddress(currentUser.getUid());
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Log.e(TAG, "Error loading user address", e);
-                    tvDeliveryAddress.setText("Error loading address");
+                    Log.e(TAG, "Error loading default address", e);
+                    tvDeliveryAddress.setText("Error loading address. Please try again.");
+                    deliveryAddress = "";
                 });
+    }
+
+    private void loadAnyAvailableAddress(String userId) {
+        // If no default address, try to get the first available address
+        db.collection("addresses")
+                .whereEqualTo("userId", userId)
+                .limit(1)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        DocumentSnapshot addressDoc = queryDocumentSnapshots.getDocuments().get(0);
+                        String addressName = addressDoc.getString("name");
+                        String fullAddress = addressDoc.getString("fullAddress");
+
+                        if (fullAddress != null && !fullAddress.trim().isEmpty()) {
+                            deliveryAddress = fullAddress;
+                            String displayText = "No default address set.\n";
+                            if (addressName != null && !addressName.trim().isEmpty()) {
+                                displayText += addressName + "\n" + fullAddress;
+                            } else {
+                                displayText += fullAddress;
+                            }
+                            tvDeliveryAddress.setText(displayText);
+                        } else {
+                            showNoAddressMessage();
+                        }
+                    } else {
+                        showNoAddressMessage();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error loading any available address", e);
+                    showNoAddressMessage();
+                });
+    }
+
+    private void showNoAddressMessage() {
+        tvDeliveryAddress.setText("No addresses found. Please add an address to continue.");
+        deliveryAddress = "";
     }
 
     private void setupClickListeners() {
         btnBack.setOnClickListener(v -> finish());
 
         findViewById(R.id.btnEditAddress).setOnClickListener(v -> {
-            // Navigate to profile/edit address activity
-            Toast.makeText(this, "Edit address functionality", Toast.LENGTH_SHORT).show();
+            // Navigate to AddressActivity
+            Intent intent = new Intent(CheckoutActivity.this, AddressActivity.class);
+            startActivity(intent);
         });
 
         btnPlaceOrder.setOnClickListener(v -> placeOrder());
+
+        // Add click listeners for payment method containers
+        findViewById(R.id.layoutCashOnDelivery).setOnClickListener(v -> {
+            rbCashOnDelivery.setChecked(true);
+        });
+
+        findViewById(R.id.layoutCreditCard).setOnClickListener(v -> {
+            rbCreditCard.setChecked(true);
+        });
+
+        // Set default selection
+        rbCashOnDelivery.setChecked(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Reload address when returning from AddressActivity
+        loadDefaultAddress();
     }
 
     private void placeOrder() {
@@ -216,6 +294,11 @@ public class CheckoutActivity extends AppCompatActivity {
 
         if (cartItems.isEmpty()) {
             Toast.makeText(this, "No items in cart", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (deliveryAddress.isEmpty()) {
+            Toast.makeText(this, "Please add a delivery address to continue", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -240,7 +323,7 @@ public class CheckoutActivity extends AppCompatActivity {
         orderData.put("paymentMethod", paymentMethod);
         orderData.put("paymentStatus", paymentStatus);
         orderData.put("status", "pending"); // pending, preparing, out_for_delivery, delivered, cancelled
-        orderData.put("deliveryAddress", tvDeliveryAddress.getText().toString());
+        orderData.put("deliveryAddress", deliveryAddress);
         orderData.put("createdAt", System.currentTimeMillis());
 
         // Add order items from cart data

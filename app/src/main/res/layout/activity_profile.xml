@@ -110,6 +110,7 @@
 
             <!-- Menu Items -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/btnorderhistory"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="12dp"
@@ -134,7 +135,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="16dp"
-                        android:text="Menu Item"
+                        android:text="Order History"
                         android:textSize="16sp"
                         android:textColor="#000" />
 
@@ -149,6 +150,7 @@
 
             <!-- Menu Items -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/btnmyaddresses"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="12dp"
@@ -173,7 +175,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="16dp"
-                        android:text="Menu Item"
+                        android:text="My Addresses"
                         android:textSize="16sp"
                         android:textColor="#000" />
 
@@ -188,6 +190,7 @@
 
             <!-- Menu Items -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/btnpaymentmethods"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="12dp"
@@ -212,7 +215,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="16dp"
-                        android:text="Menu Item"
+                        android:text="Payment Methods"
                         android:textSize="16sp"
                         android:textColor="#000" />
 
@@ -227,6 +230,7 @@
 
             <!-- Menu Items -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/btnsettings"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="12dp"
@@ -251,7 +255,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="16dp"
-                        android:text="Menu Item"
+                        android:text="Settings"
                         android:textSize="16sp"
                         android:textColor="#000" />
 
@@ -266,6 +270,7 @@
 
             <!-- Menu Items -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/btnhelp"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="12dp"
@@ -290,7 +295,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="16dp"
-                        android:text="Menu Item"
+                        android:text="Help And Support"
                         android:textSize="16sp"
                         android:textColor="#000" />
 
@@ -305,6 +310,7 @@
 
             <!-- Menu Items -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/btnabout"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="12dp"
@@ -329,46 +335,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="16dp"
-                        android:text="Menu Item"
-                        android:textSize="16sp"
-                        android:textColor="#000" />
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/backicon"
-                        app:tint="#999" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Menu Items -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="12dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="12dp">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/addicon"
-                        app:tint="#E53935" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginStart="16dp"
-                        android:text="Menu Item"
+                        android:text="About Us"
                         android:textSize="16sp"
                         android:textColor="#000" />
 

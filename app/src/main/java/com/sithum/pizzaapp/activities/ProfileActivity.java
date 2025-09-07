@@ -26,8 +26,12 @@ import com.sithum.pizzaapp.R;
 public class ProfileActivity extends AppCompatActivity {
 
     private ImageView btnBack;
-    private TextView tvUserName, tvUserEmail;
+    private TextView tvUserName, tvUserEmail, tvEditProfile;
     private Button logoutBtn;
+
+    // Menu item CardViews
+    private CardView btnOrderHistory, btnMyAddresses, btnPaymentMethods,
+            btnSettings, btnHelp, btnAbout;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -65,7 +69,16 @@ public class ProfileActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         tvUserName = findViewById(R.id.txtname);
         tvUserEmail = findViewById(R.id.txtemail);
+        tvEditProfile = findViewById(R.id.tvEditProfile);
         logoutBtn = findViewById(R.id.logoutBtn);
+
+        // Initialize menu item CardViews
+        btnOrderHistory = findViewById(R.id.btnorderhistory);
+        btnMyAddresses = findViewById(R.id.btnmyaddresses);
+        btnPaymentMethods = findViewById(R.id.btnpaymentmethods);
+        btnSettings = findViewById(R.id.btnsettings);
+        btnHelp = findViewById(R.id.btnhelp);
+        btnAbout = findViewById(R.id.btnabout);
 
         // Set default user data
         if (currentUser != null) {
@@ -81,6 +94,76 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        // Edit Profile
+        tvEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
+                //startActivity(intent);
+                //overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            }
+        });
+
+        // Order History
+        btnOrderHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent intent = new Intent(ProfileActivity.this, OrderHistoryActivity.class);
+               // startActivity(intent);
+                //overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            }
+        });
+
+        // My Addresses
+        btnMyAddresses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, AddressActivity.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            }
+        });
+
+        // Payment Methods
+        btnPaymentMethods.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, PaymentMethodsActivity.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            }
+        });
+
+        // Settings
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent intent = new Intent(ProfileActivity.this, SettingsActivity.class);
+                //startActivity(intent);
+                //overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            }
+        });
+
+        // Help and Support
+        btnHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // Intent intent = new Intent(ProfileActivity.this, HelpSupportActivity.class);
+               // startActivity(intent);
+                //overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            }
+        });
+
+        // About Us
+        btnAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent intent = new Intent(ProfileActivity.this, AboutUsActivity.class);
+                //startActivity(intent);
+                //overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
             }
         });
 

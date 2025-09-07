@@ -43,4 +43,8 @@
     <color name="purple_text">#6F42C1</color>
     <color name="green_text">#155724</color>
     <color name="red_text">#721C24</color>
+
+    <color name="blue">#2196F3</color>
+    <color name="blue_dark">#1976D2</color>
+    <color name="grey">#9E9E9E</color>
 </resources>
