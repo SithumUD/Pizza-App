@@ -1,6 +1,7 @@
 package com.sithum.pizzaapp.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,10 +12,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.sithum.pizzaapp.R;
 
-public class
-SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +32,35 @@ SplashActivity extends AppCompatActivity {
             return insets;
         });
 
-        new Handler(Looper.getMainLooper()).postDelayed(()->{
-            Intent intent = new Intent(SplashActivity.this, OnboardActivity.class);
-            startActivity(intent);
-            finish();
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+
+        // Initialize SharedPreferences
+        sharedPreferences = getSharedPreferences("PizzaAppPrefs", MODE_PRIVATE);
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            checkUserLoginStatus();
         }, 3000);
+    }
+
+    private void checkUserLoginStatus() {
+        // Check Firebase Auth
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        // Check SharedPreferences for login status (backup check)
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+        Intent intent;
+
+        if (currentUser != null && isLoggedIn) {
+            // User is logged in, navigate to Home
+            intent = new Intent(SplashActivity.this, HomeActivity.class);
+        } else {
+            // User is not logged in, navigate to Onboarding
+            intent = new Intent(SplashActivity.this, OnboardActivity.class);
+        }
+
+        startActivity(intent);
+        finish();
     }
 }

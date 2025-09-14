@@ -75,6 +75,8 @@ public class CheckoutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate: Starting CheckoutActivity");
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_checkout);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -84,19 +86,33 @@ public class CheckoutActivity extends AppCompatActivity {
         });
 
         // Initialize Firebase and SharedPreferences
+        Log.d(TAG, "onCreate: Initializing Firebase and SharedPreferences");
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         gson = new Gson();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            Log.d(TAG, "onCreate: User is authenticated - UID: " + currentUser.getUid());
+            Toast.makeText(this, "User authenticated: " + currentUser.getEmail(), Toast.LENGTH_SHORT).show();
+        } else {
+            Log.e(TAG, "onCreate: User is NOT authenticated!");
+            Toast.makeText(this, "ERROR: User not authenticated!", Toast.LENGTH_LONG).show();
+        }
 
         initViews();
         setupRecyclerView();
         loadCartDataFromLocalStorage();
         loadDefaultAddress();
         setupClickListeners();
+
+        Log.d(TAG, "onCreate: CheckoutActivity initialization completed");
     }
 
     private void initViews() {
+        Log.d(TAG, "initViews: Initializing UI views");
+
         tvDeliveryAddress = findViewById(R.id.tvDeliveryAddress);
         tvTotal = findViewById(R.id.tvTotal);
         paymentMethodGroup = findViewById(R.id.paymentMethodGroup);
@@ -105,19 +121,34 @@ public class CheckoutActivity extends AppCompatActivity {
         btnPlaceOrder = findViewById(R.id.btnPlaceOrder);
         itemRecyclerView = findViewById(R.id.itemlist);
         btnBack = findViewById(R.id.btnBack);
+
+        // Check if all views are found
+        if (tvDeliveryAddress == null) Log.e(TAG, "initViews: tvDeliveryAddress is NULL!");
+        if (tvTotal == null) Log.e(TAG, "initViews: tvTotal is NULL!");
+        if (btnPlaceOrder == null) Log.e(TAG, "initViews: btnPlaceOrder is NULL!");
+        if (itemRecyclerView == null) Log.e(TAG, "initViews: itemRecyclerView is NULL!");
+
+        Log.d(TAG, "initViews: All views initialized successfully");
+        Toast.makeText(this, "Views initialized", Toast.LENGTH_SHORT).show();
     }
 
     private void setupRecyclerView() {
+        Log.d(TAG, "setupRecyclerView: Setting up RecyclerView");
         itemRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        Log.d(TAG, "setupRecyclerView: RecyclerView setup completed");
     }
 
     private void loadCartDataFromLocalStorage() {
+        Log.d(TAG, "loadCartDataFromLocalStorage: Starting to load cart data");
+
         try {
             // Retrieve cart data from SharedPreferences
             String cartDataJson = sharedPreferences.getString(KEY_CART_DATA, "");
+            Log.d(TAG, "loadCartDataFromLocalStorage: Cart data JSON length: " + cartDataJson.length());
 
             if (cartDataJson.isEmpty()) {
-                Toast.makeText(this, "No cart data found", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "loadCartDataFromLocalStorage: No cart data found in SharedPreferences");
+                Toast.makeText(this, "ERROR: No cart data found", Toast.LENGTH_LONG).show();
                 finish();
                 return;
             }
@@ -128,7 +159,10 @@ public class CheckoutActivity extends AppCompatActivity {
 
             if (cartItems == null) {
                 cartItems = new ArrayList<>();
+                Log.e(TAG, "loadCartDataFromLocalStorage: Cart items is NULL after parsing");
             }
+
+            Log.d(TAG, "loadCartDataFromLocalStorage: Parsed " + cartItems.size() + " cart items");
 
             // Retrieve totals and branch ID
             subtotal = sharedPreferences.getFloat(KEY_SUBTOTAL, 0f);
@@ -136,22 +170,30 @@ public class CheckoutActivity extends AppCompatActivity {
             total = sharedPreferences.getFloat(KEY_TOTAL, 0f);
             branchId = sharedPreferences.getString(KEY_BRANCH_ID, "");
 
+            Log.d(TAG, "loadCartDataFromLocalStorage: Subtotal: " + subtotal);
+            Log.d(TAG, "loadCartDataFromLocalStorage: Delivery Fee: " + deliveryFee);
+            Log.d(TAG, "loadCartDataFromLocalStorage: Total: " + total);
+            Log.d(TAG, "loadCartDataFromLocalStorage: Branch ID: " + branchId);
+
             // Display total
             tvTotal.setText(String.format("LKR %d", (int) total));
 
             // Setup recycler view with cart items
             setupCheckoutItemsRecyclerView();
 
-            Log.d(TAG, "Cart data loaded from local storage. Items: " + cartItems.size());
+            Toast.makeText(this, "Cart loaded: " + cartItems.size() + " items, Total: LKR " + (int)total, Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "loadCartDataFromLocalStorage: Cart data loaded successfully");
 
         } catch (Exception e) {
-            Log.e(TAG, "Error loading cart data from local storage", e);
-            Toast.makeText(this, "Error loading cart data", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "loadCartDataFromLocalStorage: ERROR loading cart data", e);
+            Toast.makeText(this, "ERROR: Failed to load cart data - " + e.getMessage(), Toast.LENGTH_LONG).show();
             finish();
         }
     }
 
     private void setupCheckoutItemsRecyclerView() {
+        Log.d(TAG, "setupCheckoutItemsRecyclerView: Setting up checkout items");
+
         // Convert CartItem data to lists for the adapter
         List<String> productNames = new ArrayList<>();
         List<Integer> quantities = new ArrayList<>();
@@ -161,22 +203,33 @@ public class CheckoutActivity extends AppCompatActivity {
             productNames.add(item.getProductName());
             quantities.add(item.getQuantity());
             prices.add(item.getTotalPrice());
+            Log.d(TAG, "setupCheckoutItemsRecyclerView: Item - " + item.getProductName() +
+                    ", Qty: " + item.getQuantity() + ", Price: " + item.getTotalPrice());
         }
 
         CheckoutItemAdapter adapter = new CheckoutItemAdapter(productNames, quantities, prices);
         itemRecyclerView.setAdapter(adapter);
+
+        Log.d(TAG, "setupCheckoutItemsRecyclerView: Adapter set with " + productNames.size() + " items");
+        Toast.makeText(this, "Items displayed: " + productNames.size(), Toast.LENGTH_SHORT).show();
     }
 
     private void loadDefaultAddress() {
+        Log.d(TAG, "loadDefaultAddress: Starting to load default address");
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
-            Toast.makeText(this, "Please login to continue", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "loadDefaultAddress: Current user is NULL");
+            Toast.makeText(this, "ERROR: Please login to continue", Toast.LENGTH_LONG).show();
             finish();
             return;
         }
 
+        Log.d(TAG, "loadDefaultAddress: User UID: " + currentUser.getUid());
+
         // Show loading state
         tvDeliveryAddress.setText("Loading address...");
+        Toast.makeText(this, "Loading delivery address...", Toast.LENGTH_SHORT).show();
 
         // Query for default address
         db.collection("addresses")
@@ -184,11 +237,17 @@ public class CheckoutActivity extends AppCompatActivity {
                 .whereEqualTo("isDefault", true)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+                    Log.d(TAG, "loadDefaultAddress: Query successful, documents found: " +
+                            queryDocumentSnapshots.size());
+
                     if (!queryDocumentSnapshots.isEmpty()) {
                         // Found default address
                         DocumentSnapshot addressDoc = queryDocumentSnapshots.getDocuments().get(0);
                         String addressName = addressDoc.getString("name");
                         String fullAddress = addressDoc.getString("fullAddress");
+
+                        Log.d(TAG, "loadDefaultAddress: Found default address - Name: " +
+                                addressName + ", Address: " + fullAddress);
 
                         if (fullAddress != null && !fullAddress.trim().isEmpty()) {
                             deliveryAddress = fullAddress;
@@ -198,34 +257,50 @@ public class CheckoutActivity extends AppCompatActivity {
                             } else {
                                 tvDeliveryAddress.setText(fullAddress);
                             }
+
+                            Toast.makeText(this, "Default address loaded", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "loadDefaultAddress: Default address set successfully");
                         } else {
                             // Handle case where address data is incomplete
+                            Log.e(TAG, "loadDefaultAddress: Address data is incomplete");
                             tvDeliveryAddress.setText("Address data incomplete. Please update your address.");
                             deliveryAddress = "";
+                            Toast.makeText(this, "Address data incomplete", Toast.LENGTH_LONG).show();
                         }
                     } else {
                         // No default address found, try to get any address
+                        Log.w(TAG, "loadDefaultAddress: No default address found, trying any available");
+                        Toast.makeText(this, "No default address found", Toast.LENGTH_SHORT).show();
                         loadAnyAvailableAddress(currentUser.getUid());
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Log.e(TAG, "Error loading default address", e);
+                    Log.e(TAG, "loadDefaultAddress: Error loading default address", e);
                     tvDeliveryAddress.setText("Error loading address. Please try again.");
                     deliveryAddress = "";
+                    Toast.makeText(this, "ERROR: Failed to load address - " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
     }
 
     private void loadAnyAvailableAddress(String userId) {
+        Log.d(TAG, "loadAnyAvailableAddress: Loading any available address for user: " + userId);
+
         // If no default address, try to get the first available address
         db.collection("addresses")
                 .whereEqualTo("userId", userId)
                 .limit(1)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+                    Log.d(TAG, "loadAnyAvailableAddress: Query successful, documents: " +
+                            queryDocumentSnapshots.size());
+
                     if (!queryDocumentSnapshots.isEmpty()) {
                         DocumentSnapshot addressDoc = queryDocumentSnapshots.getDocuments().get(0);
                         String addressName = addressDoc.getString("name");
                         String fullAddress = addressDoc.getString("fullAddress");
+
+                        Log.d(TAG, "loadAnyAvailableAddress: Found address - Name: " +
+                                addressName + ", Address: " + fullAddress);
 
                         if (fullAddress != null && !fullAddress.trim().isEmpty()) {
                             deliveryAddress = fullAddress;
@@ -236,71 +311,110 @@ public class CheckoutActivity extends AppCompatActivity {
                                 displayText += fullAddress;
                             }
                             tvDeliveryAddress.setText(displayText);
+
+                            Toast.makeText(this, "Using available address", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "loadAnyAvailableAddress: Available address set successfully");
                         } else {
+                            Log.e(TAG, "loadAnyAvailableAddress: Available address data incomplete");
                             showNoAddressMessage();
                         }
                     } else {
+                        Log.w(TAG, "loadAnyAvailableAddress: No addresses found for user");
                         showNoAddressMessage();
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Log.e(TAG, "Error loading any available address", e);
+                    Log.e(TAG, "loadAnyAvailableAddress: Error loading available address", e);
+                    Toast.makeText(this, "ERROR: Failed to load any address - " + e.getMessage(), Toast.LENGTH_LONG).show();
                     showNoAddressMessage();
                 });
     }
 
     private void showNoAddressMessage() {
+        Log.w(TAG, "showNoAddressMessage: No addresses found");
         tvDeliveryAddress.setText("No addresses found. Please add an address to continue.");
         deliveryAddress = "";
+        Toast.makeText(this, "WARNING: No delivery address found!", Toast.LENGTH_LONG).show();
     }
 
     private void setupClickListeners() {
-        btnBack.setOnClickListener(v -> finish());
+        Log.d(TAG, "setupClickListeners: Setting up click listeners");
+
+        btnBack.setOnClickListener(v -> {
+            Log.d(TAG, "btnBack clicked: Finishing activity");
+            finish();
+        });
 
         findViewById(R.id.btnEditAddress).setOnClickListener(v -> {
+            Log.d(TAG, "btnEditAddress clicked: Navigating to AddressActivity");
+            Toast.makeText(this, "Opening address management", Toast.LENGTH_SHORT).show();
             // Navigate to AddressActivity
             Intent intent = new Intent(CheckoutActivity.this, AddressActivity.class);
             startActivity(intent);
         });
 
-        btnPlaceOrder.setOnClickListener(v -> placeOrder());
+        btnPlaceOrder.setOnClickListener(v -> {
+            Log.d(TAG, "btnPlaceOrder clicked: Starting order placement");
+            Toast.makeText(this, "Place Order button clicked", Toast.LENGTH_SHORT).show();
+            placeOrder();
+        });
 
         // Add click listeners for payment method containers
         findViewById(R.id.layoutCashOnDelivery).setOnClickListener(v -> {
+            Log.d(TAG, "layoutCashOnDelivery clicked: Selecting cash on delivery");
             rbCashOnDelivery.setChecked(true);
+            Toast.makeText(this, "Cash on Delivery selected", Toast.LENGTH_SHORT).show();
         });
 
         findViewById(R.id.layoutCreditCard).setOnClickListener(v -> {
+            Log.d(TAG, "layoutCreditCard clicked: Selecting credit card");
             rbCreditCard.setChecked(true);
+            Toast.makeText(this, "Credit Card selected", Toast.LENGTH_SHORT).show();
         });
 
         // Set default selection
         rbCashOnDelivery.setChecked(true);
+        Log.d(TAG, "setupClickListeners: Default payment method set to Cash on Delivery");
+        Log.d(TAG, "setupClickListeners: Click listeners setup completed");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(TAG, "onResume: Activity resumed, reloading address");
+        Toast.makeText(this, "Refreshing delivery address", Toast.LENGTH_SHORT).show();
         // Reload address when returning from AddressActivity
         loadDefaultAddress();
     }
 
     private void placeOrder() {
+        Log.d(TAG, "placeOrder: Starting order placement process");
+        Toast.makeText(this, "Starting order placement...", Toast.LENGTH_SHORT).show();
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
-            Toast.makeText(this, "Please login to place order", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "placeOrder: Current user is NULL");
+            Toast.makeText(this, "ERROR: Please login to place order", Toast.LENGTH_LONG).show();
             return;
         }
+
+        Log.d(TAG, "placeOrder: User authenticated - UID: " + currentUser.getUid());
 
         if (cartItems.isEmpty()) {
-            Toast.makeText(this, "No items in cart", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "placeOrder: Cart is empty");
+            Toast.makeText(this, "ERROR: No items in cart", Toast.LENGTH_LONG).show();
             return;
         }
 
+        Log.d(TAG, "placeOrder: Cart has " + cartItems.size() + " items");
+
         if (deliveryAddress.isEmpty()) {
-            Toast.makeText(this, "Please add a delivery address to continue", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "placeOrder: Delivery address is empty");
+            Toast.makeText(this, "ERROR: Please add a delivery address to continue", Toast.LENGTH_LONG).show();
             return;
         }
+
+        Log.d(TAG, "placeOrder: Delivery address: " + deliveryAddress);
 
         // Get selected payment method
         String paymentMethod = "cash";
@@ -309,10 +423,17 @@ public class CheckoutActivity extends AppCompatActivity {
         if (rbCreditCard.isChecked()) {
             paymentMethod = "card";
             paymentStatus = "paid";
+            Log.d(TAG, "placeOrder: Payment method: Credit Card");
+        } else {
+            Log.d(TAG, "placeOrder: Payment method: Cash on Delivery");
         }
+
+        Toast.makeText(this, "Payment method: " + paymentMethod, Toast.LENGTH_SHORT).show();
 
         // Create order data
         String orderId = UUID.randomUUID().toString();
+        Log.d(TAG, "placeOrder: Generated order ID: " + orderId);
+
         Map<String, Object> orderData = new HashMap<>();
         orderData.put("orderId", orderId);
         orderData.put("userId", currentUser.getUid());
@@ -325,6 +446,8 @@ public class CheckoutActivity extends AppCompatActivity {
         orderData.put("status", "pending"); // pending, preparing, out_for_delivery, delivered, cancelled
         orderData.put("deliveryAddress", deliveryAddress);
         orderData.put("createdAt", System.currentTimeMillis());
+
+        Log.d(TAG, "placeOrder: Order data created - Total: " + total + ", Branch: " + branchId);
 
         // Add order items from cart data
         List<Map<String, Object>> orderItems = new ArrayList<>();
@@ -347,59 +470,99 @@ public class CheckoutActivity extends AppCompatActivity {
             item.put("selectedOptions", cartItem.getSelectedOptions());
 
             orderItems.add(item);
+
+            Log.d(TAG, "placeOrder: Added item - " + cartItem.getProductName() +
+                    ", Qty: " + cartItem.getQuantity() + ", Price: " + cartItem.getTotalPrice());
         }
         orderData.put("items", orderItems);
+
+        Log.d(TAG, "placeOrder: Order items added, total items: " + orderItems.size());
 
         // Show loading
         btnPlaceOrder.setText("Placing Order...");
         btnPlaceOrder.setEnabled(false);
 
+        Log.d(TAG, "placeOrder: Button state changed to loading");
+        Toast.makeText(this, "Saving order to database...", Toast.LENGTH_SHORT).show();
+
         // Save order to Firestore
+        Log.d(TAG, "placeOrder: Starting Firestore save operation");
+
         db.collection("orders")
                 .document(orderId)
                 .set(orderData)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "Order placed successfully: " + orderId);
+                        Log.d(TAG, "placeOrder: SUCCESS - Order saved to Firestore: " + orderId);
+                        Toast.makeText(CheckoutActivity.this, "Order placed successfully!", Toast.LENGTH_LONG).show();
 
                         // Clear cart after successful order
+                        Log.d(TAG, "placeOrder: Starting cart cleanup");
                         clearUserCart(currentUser.getUid());
 
                         // Clear cart data from local storage
                         clearCartDataFromLocalStorage();
 
                         // Navigate to order confirmation
+                        Log.d(TAG, "placeOrder: Navigating to order tracking");
                         navigateToOrderConfirmation(orderId);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.e(TAG, "Error placing order", e);
-                        Toast.makeText(CheckoutActivity.this, "Failed to place order. Please try again.", Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "placeOrder: FAILED to save order to Firestore", e);
+                        Toast.makeText(CheckoutActivity.this,
+                                "FAILED to place order: " + e.getMessage(),
+                                Toast.LENGTH_LONG).show();
+
                         btnPlaceOrder.setText("Place Order");
                         btnPlaceOrder.setEnabled(true);
+                        Log.d(TAG, "placeOrder: Button state reset after failure");
+                    }
+                })
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.d(TAG, "placeOrder: Firestore operation completed. Success: " + task.isSuccessful());
+                        if (!task.isSuccessful() && task.getException() != null) {
+                            Log.e(TAG, "placeOrder: Task completed with exception", task.getException());
+                        }
                     }
                 });
+
+        Log.d(TAG, "placeOrder: Firestore save operation initiated");
     }
 
     private void clearUserCart(String userId) {
+        Log.d(TAG, "clearUserCart: Starting to clear cart for user: " + userId);
+        Toast.makeText(this, "Clearing cart...", Toast.LENGTH_SHORT).show();
+
         db.collection("cartItems")
                 .whereEqualTo("userId", userId)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+                    Log.d(TAG, "clearUserCart: Found " + queryDocumentSnapshots.size() +
+                            " cart items to delete");
+
                     for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
                         db.collection("cartItems").document(document.getId()).delete();
+                        Log.d(TAG, "clearUserCart: Deleting cart item: " + document.getId());
                     }
-                    Log.d(TAG, "Cart cleared from Firestore after order");
+
+                    Log.d(TAG, "clearUserCart: Cart cleared from Firestore");
+                    Toast.makeText(this, "Cart cleared from server", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
-                    Log.e(TAG, "Error clearing cart from Firestore", e);
+                    Log.e(TAG, "clearUserCart: Error clearing cart from Firestore", e);
+                    Toast.makeText(this, "WARNING: Failed to clear server cart", Toast.LENGTH_SHORT).show();
                 });
     }
 
     private void clearCartDataFromLocalStorage() {
+        Log.d(TAG, "clearCartDataFromLocalStorage: Starting to clear local cart data");
+
         try {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.remove(KEY_CART_DATA);
@@ -408,18 +571,33 @@ public class CheckoutActivity extends AppCompatActivity {
             editor.remove(KEY_TOTAL);
             editor.remove(KEY_BRANCH_ID);
             editor.apply();
-            Log.d(TAG, "Cart data cleared from local storage after order");
+
+            Log.d(TAG, "clearCartDataFromLocalStorage: Local cart data cleared successfully");
+            Toast.makeText(this, "Local cart cleared", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Log.e(TAG, "Error clearing cart data from local storage", e);
+            Log.e(TAG, "clearCartDataFromLocalStorage: Error clearing local cart data", e);
+            Toast.makeText(this, "WARNING: Failed to clear local cart", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void navigateToOrderConfirmation(String orderId) {
-        //Intent intent = new Intent(this, OrderConfirmationActivity.class);
-        //intent.putExtra("orderId", orderId);
-        //intent.putExtra("total", total);
-        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        //startActivity(intent);
-        //finish();
+        Log.d(TAG, "navigateToOrderConfirmation: Navigating to OrderTrackingActivity with order ID: " + orderId);
+        Toast.makeText(this, "Opening order tracking for: " + orderId, Toast.LENGTH_SHORT).show();
+
+        try {
+            Intent intent = new Intent(this, OrderTrackingActivity.class);
+            intent.putExtra("orderId", orderId);
+            Log.d(TAG, "navigateToOrderConfirmation: Intent created with order ID");
+
+            startActivity(intent);
+            Log.d(TAG, "navigateToOrderConfirmation: Activity started");
+
+            finish();
+            Log.d(TAG, "navigateToOrderConfirmation: Current activity finished");
+
+        } catch (Exception e) {
+            Log.e(TAG, "navigateToOrderConfirmation: Error navigating to order tracking", e);
+            Toast.makeText(this, "ERROR: Failed to open order tracking - " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 }
