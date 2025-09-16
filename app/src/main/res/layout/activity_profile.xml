@@ -40,6 +40,7 @@
         android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@id/topBar"
         app:layout_constraintBottom_toTopOf="@+id/logoutBtn"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,6 +65,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="16dp"
+                    android:background="@color/white"
                     android:gravity="center_vertical">
 
                     <ImageView
@@ -132,6 +134,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
+                    android:background="@color/white"
                     android:gravity="center_vertical"
                     android:padding="12dp">
 
@@ -172,6 +175,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
+                    android:background="@color/white"
                     android:gravity="center_vertical"
                     android:padding="12dp">
 
@@ -212,6 +216,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
+                    android:background="@color/white"
                     android:gravity="center_vertical"
                     android:padding="12dp">
 
@@ -252,6 +257,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
+                    android:background="@color/white"
                     android:gravity="center_vertical"
                     android:padding="12dp">
 
@@ -293,6 +299,7 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:background="@color/white"
                     android:padding="12dp">
 
                     <ImageView

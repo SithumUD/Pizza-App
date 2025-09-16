@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
+    android:background="@color/white"
     tools:context=".activities.SignupActivity">
 
     <!-- Title -->
@@ -54,8 +55,10 @@
         android:id="@+id/etFullName"
         android:layout_width="0dp"
         android:layout_height="50dp"
+        android:textColorHint="@color/black"
         android:hint="Enter your full name"
         android:inputType="textPersonName"
+        android:background="@drawable/edit_text_rounded"
         android:padding="10dp"
         android:textSize="14sp"
         android:backgroundTint="@android:color/darker_gray"
@@ -81,8 +84,10 @@
         android:id="@+id/etEmail"
         android:layout_width="0dp"
         android:layout_height="50dp"
+        android:textColorHint="@color/black"
         android:hint="Enter your email"
         android:inputType="textEmailAddress"
+        android:background="@drawable/edit_text_rounded"
         android:padding="10dp"
         android:textSize="14sp"
         android:backgroundTint="@android:color/darker_gray"
@@ -109,7 +114,9 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:hint="Enter your phone number"
+        android:textColorHint="@color/black"
         android:inputType="phone"
+        android:background="@drawable/edit_text_rounded"
         android:padding="10dp"
         android:textSize="14sp"
         android:backgroundTint="@android:color/darker_gray"
@@ -138,6 +145,8 @@
         android:hint="Create a password"
         android:inputType="textPassword"
         android:padding="10dp"
+        android:background="@drawable/edit_text_rounded"
+        android:textColorHint="@color/black"
         android:textSize="14sp"
         android:backgroundTint="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@id/tvPasswordLabel"
@@ -165,6 +174,8 @@
         android:hint="Confirm your password"
         android:inputType="textPassword"
         android:padding="10dp"
+        android:background="@drawable/edit_text_rounded"
+        android:textColorHint="@color/black"
         android:textSize="14sp"
         android:backgroundTint="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@id/tvConfirmPasswordLabel"
@@ -196,7 +207,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="40dp">
 
         <TextView
             android:id="@+id/tvAlreadyAccount"

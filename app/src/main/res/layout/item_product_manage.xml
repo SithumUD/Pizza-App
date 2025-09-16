@@ -8,6 +8,7 @@
     app:cardCornerRadius="12dp"
     app:cardElevation="2dp"
     android:clickable="true"
+    android:background="@color/white"
     android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
@@ -15,6 +16,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
+        android:background="@color/white"
         android:gravity="center_vertical">
 
         <!-- Product Image -->

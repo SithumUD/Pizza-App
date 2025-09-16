@@ -83,7 +83,7 @@
                         android:layout_weight="1"
                         android:text="Subtotal"
                         android:textSize="14sp"
-                        android:textColor="@android:color/darker_gray"
+                        android:textColor="@color/black"
                         android:gravity="start" />
 
                     <TextView
@@ -91,6 +91,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="LKR 3,400"
+                        android:textColor="@color/black"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:gravity="end" />
@@ -109,7 +110,7 @@
                         android:layout_weight="1"
                         android:text="Delivery Fee"
                         android:textSize="14sp"
-                        android:textColor="@android:color/darker_gray"
+                        android:textColor="@color/black"
                         android:gravity="start" />
 
                     <TextView
@@ -117,6 +118,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="LKR 200"
+                        android:textColor="@color/black"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:gravity="end" />

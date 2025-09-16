@@ -38,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_rounded"
             app:boxStrokeColor="#E53E3E"
             app:hintTextColor="#E53E3E">
 
@@ -46,6 +47,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter product name"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:background="@color/white"
                 android:inputType="text"
                 android:textSize="16sp" />
 
@@ -65,6 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             app:boxStrokeColor="#E53E3E"
+            android:background="@drawable/edit_text_rounded"
             app:hintTextColor="#E53E3E">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -73,6 +78,9 @@
                 android:layout_height="wrap_content"
                 android:hint="Enter product description"
                 android:inputType="textMultiLine"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:background="@color/white"
                 android:maxLines="3"
                 android:textSize="16sp" />
 
@@ -91,6 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_rounded"
             app:boxStrokeColor="#E53E3E"
             app:hintTextColor="#E53E3E"
             app:prefixText="LKR ">
@@ -100,6 +109,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="0.00"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:background="@color/white"
                 android:inputType="numberDecimal"
                 android:textSize="16sp" />
 
@@ -119,7 +131,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/spinner_background"
+            android:background="@color/white"
             android:paddingHorizontal="12dp" />
 
         <!-- Product Image -->
@@ -190,6 +202,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/edit_text_rounded"
                 android:layout_marginEnd="8dp"
                 app:boxStrokeColor="#E53E3E"
                 app:hintTextColor="#E53E3E">
@@ -199,6 +212,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Option name"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:background="@color/white"
                     android:inputType="text"
                     android:textSize="14sp" />
 
@@ -208,6 +224,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
+                android:background="@drawable/edit_text_rounded"
                 app:boxStrokeColor="#E53E3E"
                 app:hintTextColor="#E53E3E"
                 app:prefixText="LKR ">
@@ -217,6 +234,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Price"
+                    android:background="@color/white"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
                     android:inputType="numberDecimal"
                     android:textSize="14sp" />
 

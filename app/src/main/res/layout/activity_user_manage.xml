@@ -249,6 +249,7 @@
                     app:boxStrokeWidth="1dp"
                     app:boxCornerRadiusTopStart="8dp"
                     app:boxCornerRadiusTopEnd="8dp"
+                    android:background="@drawable/edit_text_rounded"
                     app:boxCornerRadiusBottomStart="8dp"
                     app:boxCornerRadiusBottomEnd="8dp">
 
@@ -257,6 +258,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Enter full name"
+                        android:background="@color/white"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
                         android:textSize="16sp"
                         android:padding="16dp" />
 
@@ -276,6 +280,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     app:boxStrokeWidth="1dp"
+                    android:background="@drawable/edit_text_rounded"
                     app:boxCornerRadiusTopStart="8dp"
                     app:boxCornerRadiusTopEnd="8dp"
                     app:boxCornerRadiusBottomStart="8dp"
@@ -286,6 +291,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Enter email address"
+                        android:background="@color/white"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
                         android:inputType="textEmailAddress"
                         android:textSize="16sp"
                         android:padding="16dp" />
@@ -306,6 +314,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     app:boxStrokeWidth="1dp"
+                    android:background="@drawable/edit_text_rounded"
                     app:boxCornerRadiusTopStart="8dp"
                     app:boxCornerRadiusTopEnd="8dp"
                     app:boxCornerRadiusBottomStart="8dp"
@@ -316,6 +325,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="+94 XX XXX XXXX"
+                        android:background="@color/white"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
                         android:inputType="phone"
                         android:textSize="16sp"
                         android:padding="16dp" />
@@ -337,6 +349,7 @@
                     android:layout_marginBottom="20dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     app:boxCornerRadiusTopStart="8dp"
+                    android:background="@drawable/edit_text_rounded"
                     app:boxCornerRadiusTopEnd="8dp"
                     app:boxCornerRadiusBottomStart="8dp"
                     app:boxCornerRadiusBottomEnd="8dp">
@@ -370,6 +383,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:visibility="gone"
+                    android:background="@drawable/edit_text_rounded"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     app:boxCornerRadiusTopStart="8dp"
                     app:boxCornerRadiusTopEnd="8dp"
@@ -539,6 +553,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:background="@color/white"
                         android:padding="16dp">
 
                         <TextView
@@ -595,6 +610,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:background="@color/white"
                         android:padding="16dp">
 
                         <TextView

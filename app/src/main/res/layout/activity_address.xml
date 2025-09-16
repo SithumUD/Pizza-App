@@ -45,6 +45,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="visible"
+        android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@id/topBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +82,7 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="@android:color/white"
+        android:background="@color/white"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/topBar"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,6 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add New Address"
+            android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginBottom="12dp"/>
@@ -101,6 +103,9 @@
             android:id="@+id/etAddressName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:background="@drawable/edit_text_rounded"
             android:hint="Enter address name (e.g. Home, Office)"
             android:padding="12dp"
             android:layout_marginBottom="12dp"/>
@@ -111,6 +116,9 @@
             android:layout_height="wrap_content"
             android:hint="Enter full address"
             android:padding="12dp"
+            android:background="@drawable/edit_text_rounded"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
             android:layout_marginBottom="12dp"/>
 
         <CheckBox
@@ -118,6 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Set as default address"
+            android:textColor="@color/black"
             android:layout_marginBottom="16dp"/>
 
         <LinearLayout

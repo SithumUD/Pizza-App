@@ -187,6 +187,7 @@
                         android:layout_height="48dp"
                         android:layout_marginBottom="16dp"
                         android:hint="Sachin Perera"
+                        android:background="@drawable/edit_text_rounded"
                         android:paddingHorizontal="16dp"
                         android:textColor="#333333"
                         android:textSize="16sp" />
@@ -206,6 +207,7 @@
                         android:layout_height="48dp"
                         android:layout_marginBottom="16dp"
                         android:hint="sachin.p@email.com"
+                        android:background="@drawable/edit_text_rounded"
                         android:paddingHorizontal="16dp"
                         android:textColor="#333333"
                         android:textSize="16sp" />
@@ -225,6 +227,7 @@
                         android:layout_height="48dp"
                         android:layout_marginBottom="20dp"
                         android:hint="+94 77 123 4567"
+                        android:background="@drawable/edit_text_rounded"
                         android:paddingHorizontal="16dp"
                         android:textColor="#333333"
                         android:textSize="16sp" />
@@ -354,6 +357,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginBottom="16dp"
+                        android:background="@drawable/edit_text_rounded"
                         android:hint="Enter your current password"
                         android:inputType="textPassword"
                         android:paddingHorizontal="16dp"
@@ -376,6 +380,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginBottom="16dp"
+                        android:background="@drawable/edit_text_rounded"
                         android:hint="Enter your new password"
                         android:inputType="textPassword"
                         android:paddingHorizontal="16dp"
@@ -400,6 +405,7 @@
                         android:layout_marginBottom="8dp"
                         android:hint="Confirm your new password"
                         android:inputType="textPassword"
+                        android:background="@drawable/edit_text_rounded"
                         android:paddingHorizontal="16dp"
                         android:textColor="#333333"
                         android:textColorHint="#CCCCCC"

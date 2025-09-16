@@ -13,6 +13,7 @@
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:paddingTop="20dp"
         android:background="#F06292"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -49,6 +50,7 @@
         android:id="@+id/contentContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@id/headerLayout"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -108,6 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"
+            android:background="@color/white"
             android:fillViewport="true">
 
             <LinearLayout
@@ -141,6 +144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     app:boxStrokeWidth="1dp"
+                    android:background="@drawable/edit_text_rounded"
                     app:boxCornerRadiusTopStart="8dp"
                     app:boxCornerRadiusTopEnd="8dp"
                     app:boxCornerRadiusBottomStart="8dp"
@@ -151,6 +155,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Enter branch name"
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
+                        android:background="@color/white"
                         android:textSize="16sp"
                         android:padding="16dp" />
 
@@ -170,6 +177,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     app:boxStrokeWidth="1dp"
+                    android:background="@drawable/edit_text_rounded"
                     app:boxCornerRadiusTopStart="8dp"
                     app:boxCornerRadiusTopEnd="8dp"
                     app:boxCornerRadiusBottomStart="8dp"
@@ -180,6 +188,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Enter address"
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
+                        android:background="@color/white"
                         android:textSize="16sp"
                         android:padding="16dp" />
 
@@ -199,6 +210,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     app:boxStrokeWidth="1dp"
+                    android:background="@drawable/edit_text_rounded"
                     app:boxCornerRadiusTopStart="8dp"
                     app:boxCornerRadiusTopEnd="8dp"
                     app:boxCornerRadiusBottomStart="8dp"
@@ -209,6 +221,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="+94 XX XXX XXXX"
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
+                        android:background="@color/white"
                         android:inputType="phone"
                         android:textSize="16sp"
                         android:padding="16dp" />
@@ -229,6 +244,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     app:boxStrokeWidth="1dp"
+                    android:background="@drawable/edit_text_rounded"
                     app:boxCornerRadiusTopStart="8dp"
                     app:boxCornerRadiusTopEnd="8dp"
                     app:boxCornerRadiusBottomStart="8dp"
@@ -239,7 +255,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Enter manager name"
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
                         android:textSize="16sp"
+                        android:background="@color/white"
                         android:padding="16dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -275,6 +294,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:layout_marginBottom="20dp"
                     android:weightSum="2">
 
                     <!-- Cancel Button -->
@@ -379,12 +399,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
                     app:cardCornerRadius="12dp"
+                    android:background="@color/white"
                     app:cardElevation="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:background="@color/white"
                         android:padding="20dp">
 
                         <!-- Address -->
@@ -480,7 +502,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Active"
-                                android:textColor="#4CAF50"
+                                android:textColor="@color/white"
                                 android:textSize="14sp"
                                 android:textStyle="bold"
                                 android:background="@drawable/chip_bg"
